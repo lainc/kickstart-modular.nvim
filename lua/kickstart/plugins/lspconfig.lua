@@ -158,7 +158,12 @@ return {
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {},
+        -- pyright = {
+        --   settings = {
+        --     pyright = { autoImportCompletion = true },
+        --     python = { analysis = { autoSearchPaths = true, diagnosticMode = 'openFilesOnly', useLibraryCodeForTypes = true, typeCheckingMode = 'off' } },
+        --   },
+        -- },
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -168,7 +173,7 @@ return {
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
-
+        basedpyright = {},
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
@@ -198,6 +203,10 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'black',
+        -- 'pyre',
+        'ruff',
+        -- 'pyright',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
